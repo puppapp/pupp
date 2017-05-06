@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "main": "index.js",
   "scripts": {
+    "start": "babel-node index",
     "test": "mocha app/**/**.spec.js"
   },
   "repository": {
@@ -30,6 +31,7 @@
     "mongoose": "^4.9.7",
     "mongoose-findorcreate": "^1.0.1",
     "morgan": "^1.8.1",
-    "passport": "^0.3.2"
+    "passport": "^0.3.2",
+    "passport-facebook": "^2.1.1"
   }
 }
