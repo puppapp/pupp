@@ -2,10 +2,8 @@ require('dotenv').config()
 import passport from 'passport'
 import PassportFacebook from 'passport-facebook'
 import mongoose from 'mongoose'
-import userModel from './../user/model'
 
 const FacebookStrategy = PassportFacebook.Strategy
-userModel()
 
 export default function () {
   const User = mongoose.model('User')
@@ -13,9 +11,10 @@ export default function () {
   passport.use(new FacebookStrategy({
     clientID: process.env.FACEBOOK_APP_ID,
     clientSecret: process.env.FACEBOOK_APP_SECRET,
-    callbackURL: process.env.APP_URL + '/auth/facebook/callback'
+    callbackURL: process.env.APP_URL + 'auth/facebook/callback',
+    profileFields: ['id', 'displayName', 'photos', 'emails']
   },
-  function (accessToken, refreshToken, profile, done) {
+  function (accessToken, refreshToken, profile, cb) {
     User.findOrCreate(
       { 'facebookId': profile.emails[0].value },
       { 'name': profile.displayName,
@@ -24,9 +23,9 @@ export default function () {
       function (erro, user) {
         if (erro) {
           console.log(erro)
-          return done(erro)
+          return cb(erro)
         }
-        return done(null, user)
+        return cb(null, user)
       }
     )
   }))
