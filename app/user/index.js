@@ -1,3 +1,4 @@
+import initUser from './init'
 export default {
-  init: require('./init')
+  init: initUser
 }

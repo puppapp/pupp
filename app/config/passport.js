@@ -17,9 +17,10 @@ export default function () {
   },
   function (accessToken, refreshToken, profile, done) {
     User.findOrCreate(
-      { 'login': profile.emails[0].value },
+      { 'facebookId': profile.emails[0].value },
       { 'name': profile.displayName,
-        'photo': profile.photos[0].value },
+        'photo': profile.photos[0].value,
+        'email': profile.emails[0].value },
       function (erro, user) {
         if (erro) {
           console.log(erro)

@@ -9,7 +9,7 @@ function initAuth (app) {
 }
 
 function renderLogin (req, res) {
-  res.send('Login aqui carai')
+  res.send('Login aqui!')
 }
 
 export default initAuth

@@ -7,6 +7,7 @@ import bodyParser from 'body-parser'
 import helmet from 'helmet'
 
 import database from './config/database'
+import user from './user'
 import auth from './auth'
 
 const app = express()
@@ -19,6 +20,7 @@ app.use(bodyParser.json())
 app.use(helmet())
 
 database(process.env.MONGOLAB_URI || 'mongodb://localhost/pupp')
+user.init(app)
 auth.init(app)
 
 export default app
